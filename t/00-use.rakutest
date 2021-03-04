@@ -1,0 +1,24 @@
+use v6.d;
+use Test;
+
+# Will need at least these Core and Games versions to use these UI modules
+use MUGS::Core:ver<0.0.3>;
+use MUGS::Games:ver<0.0.3>;
+
+
+### WEBSIMPLE INTERFACE
+
+use MUGS::App::WebSimple::Session;
+use MUGS::App::WebSimple::Routes;
+
+use MUGS::UI::WebSimple::Genre::Guessing;
+use MUGS::UI::WebSimple::Game::NumberGuess;
+use MUGS::UI::WebSimple::Game::Snowman;
+
+use MUGS::App::WebSimple Empty;
+
+
+pass "all modules loaded successfully";
+
+
+done-testing;
