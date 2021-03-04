@@ -1,0 +1,14 @@
+div#header { background-color: #eeeeff }
+div#logo   { float: left; font-weight: bold }
+div#user   { text-align: right; min-height: 1em }
+div#main   { clear: both; margin-top: 1em }
+div#error  { color: #f00 }
+
+div#joined-games-list    { margin-bottom: 1em }
+div#joined-games-list th { text-align: left }
+
+div#identities th.row-label { text-align: left; padding-right: 1em }
+
+div#available-games-list th,td { text-align: left; padding-right: 1em }
+
+dt { font-weight: bold }
