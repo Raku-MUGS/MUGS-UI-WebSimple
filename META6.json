@@ -6,6 +6,10 @@
   "build-depends": [
   ],
   "depends": [
+    "Cro::HTTP",
+    "Cro::WebApp",
+    "MUGS::Core:ver<0.0.3>",
+    "MUGS::Games:ver<0.0.3>"
   ],
   "description": "WebSimple UI for MUGS, including HTTP gateway and game UIs",
   "license": "Artistic-2.0",
