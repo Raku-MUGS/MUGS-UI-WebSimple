@@ -6,12 +6,18 @@
   ],
   "depends": [
   ],
-  "description": "blah blah blah",
+  "description": "WebSimple UI for MUGS, including HTTP gateway and game UIs",
   "license": "Artistic-2.0",
   "name": "MUGS::UI::WebSimple",
   "perl": "6.d",
   "provides": {
-    "MUGS::UI::WebSimple": "lib/MUGS/UI/WebSimple.rakumod"
+    "MUGS::App::WebSimple": "lib/MUGS/App/WebSimple.rakumod",
+    "MUGS::App::WebSimple::Routes": "lib/MUGS/App/WebSimple/Routes.rakumod",
+    "MUGS::App::WebSimple::Session": "lib/MUGS/App/WebSimple/Session.rakumod",
+    "MUGS::UI::WebSimple": "lib/MUGS/UI/WebSimple.rakumod",
+    "MUGS::UI::WebSimple::Game::NumberGuess": "lib/MUGS/UI/WebSimple/Game/NumberGuess.rakumod",
+    "MUGS::UI::WebSimple::Game::Snowman": "lib/MUGS/UI/WebSimple/Game/Snowman.rakumod",
+    "MUGS::UI::WebSimple::Genre::Guessing": "lib/MUGS/UI/WebSimple/Genre/Guessing.rakumod"
   },
   "resources": [
   ],
@@ -20,5 +26,5 @@
   ],
   "test-depends": [
   ],
-  "version": "0.0.1"
+  "version": "0.0.3"
 }
