@@ -1,0 +1,27 @@
+<:use 'common.crotmp'><&page-header('Home', '')>
+<h1>Welcome to MUGS!</h1>
+
+<p>
+  MUGS (<strong>M</strong>ulti-<strong>U</strong>ser <strong>G</strong>aming
+  <strong>S</strong>ervices) is a free-as-in-speech platform for building game
+  servers that can serve any game, to anyone, using the interfaces that work
+  best for them.
+</p>
+
+<p>
+  This is the <strong>WebSimple</strong> interface; it is designed to:
+  <ul>
+    <li>Be resource-friendly and low-bandwidth</li>
+    <li>Minimize flashing and garish graphics</li>
+  </ul>
+</p>
+
+<p>
+  You are currently logged out. You may either:
+</p>
+
+<p>
+  <a href="/login"><button type="button" autofocus="autofocus">Log In</button></a>
+  <a href="/account/new"><button type="button">Create a New Account</button></a>
+</p>
+<&page-footer>

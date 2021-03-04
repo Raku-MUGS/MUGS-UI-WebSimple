@@ -1,0 +1,47 @@
+<:use 'common.crotmp'><&page-header('Identities', .user)>
+<p>
+  There are three kinds of MUGS identities, with different uses:
+</p>
+
+<dl>
+  <dt>User</dt>
+  <dd>Logging in, security, and access control</dd>
+  <dt>Persona</dt>
+  <dd>Managing characters, interacting with players outside games</dd>
+  <dt>Character</dt>
+  <dd>Joining and playing games</dd>
+</dl>
+
+<p>
+  You are already logged in with a valid user (<.user.username>),
+  <?.has-identities>and have chosen a default persona and character.</?>
+  <!.has-identities><?.default-persona>and have a default persona (<.default-persona>),</?>
+  but haven't yet chosen a default <!.default-persona>persona and </!>character.</!>
+</p>
+
+<hr />
+
+<?.available>
+<p>
+  Currently known identities:
+</p>
+
+<ul>
+<@available: $p>
+  <li><?{ $p.persona eq .default-persona }><strong><$p.persona></strong> <em>(default persona)</em></?><!{ $p.persona eq .default-persona }><$p.persona></!>
+    <ul>
+    <@$p.characters: $c>
+      <li><?{ $c eq .default-character }><strong><$c></strong> <em>(default character)</em></?><!{ $c eq .default-character }><$c></!></li>
+    </@>
+      <li><a href="/identity/persona/<$p.persona>/character/new"><button type="button">Create a New Character in the '<$p.persona>' Persona</button></a></li>
+    </ul>
+  </li>
+</@>
+</ul>
+</?>
+
+<p>
+  <a href="/identity/persona/new"><button type="button">Create a New Persona</button></a>
+</p>
+
+<&page-footer>

@@ -1,0 +1,20 @@
+<:use 'common.crotmp'><&page-header('Create Account', 0)>
+<p>
+  To create a new account on this MUGS server, please choose a username and
+  password for the account owner.
+</p>
+
+<form method="POST" action="/account/new">
+  <div id="error"><$_></div>
+  <div>
+    Desired username: <input type="text" name="username" autofocus="autofocus" />
+  </div>
+  <div>
+    Desired password: <input type="password" name="password" />
+  </div>
+  <div>
+    Confirm password: <input type="password" name="confirm" />
+  </div>
+  <input type="submit" value="Create" />
+</form>
+<&page-footer>

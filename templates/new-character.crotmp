@@ -1,0 +1,13 @@
+<:use 'common.crotmp'><&page-header('Create Character', .user)>
+<p>
+  To create a new character in the persona '<.persona-name>', please choose a screen name.
+</p>
+
+<form method="POST" action="/identity/persona/<.persona-name>/character/new">
+  <div id="error"><.error></div>
+  <div>
+    Desired screen name: <input type="text" name="name" autofocus="autofocus" />
+  </div>
+  <input type="submit" value="Create" />
+</form>
+<&page-footer>

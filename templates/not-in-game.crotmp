@@ -1,0 +1,5 @@
+<:use 'common.crotmp'><&page-header('Home', .user)>
+<div id="error">
+You are not currently in <.game-type> game <.game-id>.
+</div>
+<&page-footer>

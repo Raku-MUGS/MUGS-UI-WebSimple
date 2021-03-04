@@ -1,0 +1,6 @@
+<:use 'common.crotmp'><&page-header('Play Time!', .user)>
+Yay!  We're going to play <.game-type> game <.game-id>!
+<p>
+<a href="<.game-id>/leave">Leave this game</a>
+</p>
+<&page-footer>

@@ -1,0 +1,25 @@
+<:sub guessing-game($title, $_)>
+<:use 'common.crotmp'><&page-header($title, .user)>
+<p>
+<.game-type> game <.game-id><!.done> (<a href="<.game-id>/leave">leave this game</a>)</!>:
+</p>
+<form method="POST" action="<.game-id>">
+  <div id="error"><.error></div>
+  <div id="guess-status"><.guess-status></div>
+  <div id="game-status"><&HTML(.game-status)></div>
+  <?.tried>
+  <div>Previous guesses:
+  <@tried>
+  <$_>
+  </@>
+  </div>
+  </?>
+  <!.done>
+  <div>
+    <.prompt> <input type="text" name="guess" autofocus="autofocus" />
+  </div>
+  <input type="submit" value="Submit Guess" />
+  </!>
+  <div id="winloss-status"><.winloss-status></div>
+</form>
+<&page-footer></:>

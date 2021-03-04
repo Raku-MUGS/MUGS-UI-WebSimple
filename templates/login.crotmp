@@ -1,0 +1,12 @@
+<:use 'common.crotmp'><&page-header('Login', 0)>
+<form method="POST" action="/login">
+  <div id="error"><$_></div>
+  <div>
+    Username: <input type="text" name="username" autofocus="autofocus" />
+  </div>
+  <div>
+    Password: <input type="password" name="password" />
+  </div>
+  <input type="submit" value="Log In" />
+</form>
+<&page-footer>
