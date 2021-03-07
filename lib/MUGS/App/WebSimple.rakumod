@@ -33,6 +33,13 @@ sub create-web-ui-server(:$application!, Str:D :$host!, UInt:D :$port!,
 }
 
 
+#| Convenience method to flush a single message to $*OUT without autoflush
+sub put-flushed(Str:D $message) {
+    put $message;
+    $*OUT.flush;
+}
+
+
 #| Launch a MUGS web UI server on host:port, using a MUGS backend at server
 sub MAIN(Str:D  :$host = %*ENV<MUGS_WEB_SIMPLE_HOST> || 'localhost',
          UInt:D :$port = %*ENV<MUGS_WEB_SIMPLE_PORT> || 20_000,
@@ -53,7 +60,7 @@ sub MAIN(Str:D  :$host = %*ENV<MUGS_WEB_SIMPLE_HOST> || 'localhost',
 
     my $*DEBUG         = $debug;
     my $mugs-server    = $server || create-stub-mugs-server;
-    put "Using {$server ?? "server '$server'" !! 'internal stub server'}.";
+    put-flushed "Using {$server ?? "server '$server'" !! 'internal stub server'}.";
 
     my %mugs-ca        = ca-file => $server-ca-file;
     my $SessionManager = Cro::HTTP::Session::InMemory[MUGSSession];
@@ -65,10 +72,10 @@ sub MAIN(Str:D  :$host = %*ENV<MUGS_WEB_SIMPLE_HOST> || 'localhost',
 
     $ui-server.start;
     my $url = "http{'s' if $secure}://$host:$port/";
-    put "Listening at $url";
+    put-flushed "Listening at $url";
     react {
         whenever signal(SIGINT) {
-            put 'Shutting down.';
+            put-flushed 'Shutting down.';
             $ui-server.stop;
             done;
         }
