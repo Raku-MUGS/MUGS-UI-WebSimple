@@ -56,7 +56,7 @@ sub MAIN(Str:D  :$host = %*ENV<MUGS_WEB_SIMPLE_HOST> || 'localhost',
          UInt:D :$server-port = %*ENV<MUGS_WEBSOCKET_PORT> || 0,
          Str:D  :$server = $server-host && $server-port
                            ?? "wss://$server-host:$server-port/mugs-ws" !! '',
-         Bool:D :$secure = True, Bool:D :$debug = True) is export {
+         Bool:D :$secure = False, Bool:D :$debug = True) is export {
 
     my $*DEBUG         = $debug;
     my $mugs-server    = $server || create-stub-mugs-server;

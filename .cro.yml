@@ -1,0 +1,20 @@
+---
+cro:        1
+id:         mugs-web-simple
+name:       "MUGS WebSimple UI Server"
+entrypoint: "bin/mugs-web-simple"
+endpoints:
+  -
+    id:       http
+    name:     HTTP
+    protocol: http
+    host-env: MUGS_WEB_SIMPLE_HOST
+    port-env: MUGS_WEB_SIMPLE_PORT
+links:
+  -
+    service:  mugs-websocket
+    endpoint: wss
+    host-env: MUGS_WEBSOCKET_HOST
+    port-env: MUGS_WEBSOCKET_PORT
+env:  []
+...
