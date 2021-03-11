@@ -1,8 +1,6 @@
 Revision history for MUGS-UI-WebSimple
 
-{{$NEXT}}
-
-0.0.4 *WIP*
+0.0.4  2021-03-10
   [Packaging]
   - Support Docker builds
 
@@ -10,5 +8,5 @@ Revision history for MUGS-UI-WebSimple
   - Flush WebSimple server startup messages immediately
 
 
-0.0.3 2021-03-04
+0.0.3  2021-03-04
   - First public upload
