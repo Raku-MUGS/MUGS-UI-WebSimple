@@ -1,7 +1,8 @@
-div#header { background-color: #eeeeff }
+header     { background-color: #eeeeff }
 div#logo   { float: left; font-weight: bold }
 div#user   { text-align: right; min-height: 1em }
-div#main   { clear: both; margin-top: 1em }
+
+main       { clear: both; margin-top: 1em }
 div#error  { color: #f00 }
 
 div#joined-games-list    { margin-bottom: 1em }
