@@ -60,7 +60,7 @@ sub MAIN(Str:D  :$host = %*ENV<MUGS_WEB_SIMPLE_HOST> || 'localhost',
 
     my $*DEBUG         = $debug;
     my $mugs-server    = $server || create-stub-mugs-server;
-    put-flushed "Using {$server ?? "server '$server'" !! 'internal stub server'}.";
+    put-flushed "Using {$server ?? "server '$server'" !! 'internal stub server.'}";
 
     my %mugs-ca        = ca-file => $server-ca-file;
     my $SessionManager = Cro::HTTP::Session::InMemory[MUGSSession];
