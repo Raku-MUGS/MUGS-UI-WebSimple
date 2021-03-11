@@ -9,7 +9,7 @@
   </table>
   <p>
     <?.has-identities>
-    <a href="/identity"><button type="button" autofocus="autofocus">Choose Different Identities</button></a>
+    <a href="/identity"><button type="button">Choose Different Identities</button></a>
     </?>
     <!.has-identities>
     In order to play games, you will need to <a href="/identity"><button type="button" autofocus="autofocus">Choose Your Identities</button></a>.
