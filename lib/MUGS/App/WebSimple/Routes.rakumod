@@ -3,9 +3,6 @@ use Cro::WebApp::Template;
 
 use MUGS::Core;
 use MUGS::UI;
-use MUGS::UI::WebSimple::Game::NumberGuess;
-use MUGS::UI::WebSimple::Game::Snowman;
-
 use MUGS::App::WebSimple::Session;
 
 
@@ -19,8 +16,10 @@ sub routes(IO::Path:D :$root!, :$mugs!, :%mugs-ca!, Mu:U :$SessionManager!) is e
         include session-routes(:$mugs, :%mugs-ca);
         include logged-in-routes(:$mugs);
 
-        include game-routes-number-guess;
-        include game-routes-snowman;
+        my $ui-type = 'WebSimple';
+        for MUGS::UI.known-games($ui-type) -> $game-type {
+            include MUGS::UI.ui-class($ui-type, $game-type).game-routes;
+        }
     }
 }
 

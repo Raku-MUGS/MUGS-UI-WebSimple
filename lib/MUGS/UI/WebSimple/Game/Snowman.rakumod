@@ -71,15 +71,14 @@ class MUGS::UI::WebSimple::Game::Snowman is MUGS::UI::WebSimple::Genre::Guessing
     method stage-names() {
         « body shoulders head hat arms broom »
     }
-}
 
-
-sub game-routes-snowman() is export {
-    route {
-        include < game snowman > => genre-routes-guessing('snowman');
+    method game-routes() {
+        route {
+            include < game snowman > => genre-routes-guessing('snowman');
+        }
     }
 }
 
 
-# Register this class as a valid client
+# Register this class as a valid game UI
 MUGS::UI::WebSimple::Game::Snowman.register;

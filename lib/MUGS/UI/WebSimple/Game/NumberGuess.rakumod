@@ -22,12 +22,11 @@ class MUGS::UI::WebSimple::Game::NumberGuess is MUGS::UI::WebSimple::Genre::Gues
                $result == More ?? 'too high.' !!
                                   'correct.')
     }
-}
 
-
-sub game-routes-number-guess() is export {
-    route {
-        include < game number-guess > => genre-routes-guessing('number-guess');
+    method game-routes() {
+        route {
+            include < game number-guess > => genre-routes-guessing('number-guess');
+        }
     }
 }
 
