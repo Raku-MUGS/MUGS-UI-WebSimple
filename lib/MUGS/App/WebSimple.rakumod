@@ -5,13 +5,7 @@ use Cro::HTTP::Server;
 use Cro::HTTP::Session::InMemory;
 
 use MUGS::Client;
-use MUGS::Client::Game::NumberGuess;
-use MUGS::Client::Game::Snowman;
-
 use MUGS::Server::Stub;
-use MUGS::Server::Game::NumberGuess;
-use MUGS::Server::Game::Snowman;
-
 use MUGS::App::WebSimple::Session;
 use MUGS::App::WebSimple::Routes;
 
@@ -66,9 +60,29 @@ sub MAIN(# Web gateway host:port
          Bool:D :$secure      = False,
          Bool:D :$debug       = True,
         ) is export {
-    my $*DEBUG         = $debug;
-    my $mugs-server    = $server || create-stub-mugs-server;
-    put-flushed "Using {$server ?? "server '$server'" !! 'internal stub server.'}";
+
+    $PROCESS::DEBUG = $debug;
+
+    put-flushed 'Loading game client plugins.';
+    MUGS::Client.load-game-plugins;
+    my @loaded = MUGS::Client.known-implementations.sort;
+    put-flushed "Loaded: @loaded[]\n";
+
+    my $mugs-server = do if $server {
+        put-flushed "Using server '$server'";
+        $server
+    }
+    else {
+        put-flushed 'Using internal stub server.';
+        my $stub = create-stub-mugs-server;
+
+        put-flushed 'Loading game server plugins.';
+        $stub.load-game-plugins;
+        my @loaded = $stub.known-implementations.sort;
+        put-flushed "Loaded: @loaded[]\n";
+
+        $stub
+    }
 
     my %mugs-ca        = ca-file => $server-ca-file;
     my $SessionManager = Cro::HTTP::Session::InMemory[MUGSSession];
