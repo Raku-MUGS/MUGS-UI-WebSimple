@@ -42,12 +42,29 @@ sub genre-routes-guessing(Str:D $game-type) is export {
         ($client, $ui)
     }
 
+    my sub base-objects(LoggedIn $user, GameID:D $game-id) {
+        my ($client, $ui) = client-ui($user, $game-id);
+        my $topic = { :$user, :$game-type, :$game-id, :!done,
+                      :tried([]), :error(''), :prompt($ui.guess-prompt),
+                      :guess-status(''), :game-status(''), :winloss-status('') };
+
+        ($client, $ui, $topic)
+    }
+
+    my sub update-topic($topic, $response) {
+        $topic<tried> = $response.data<tried>;
+        $topic<done>  = $response.data<gamestate> >= Finished;
+
+        $topic<guess-status> = $ui.guess-status($response)
+            if $response.data<result>.defined;
+
+        $topic<game-status>    = $ui.game-status($response);
+        $topic<winloss-status> = $ui.winloss-status($response);
+    }
+
     route {
         get -> LoggedIn $user, GameID $game-id where { $user.session.games{$_} }, *@ {
-            my ($client, $ui) = client-ui($user, $game-id);
-            my $topic = { :$user, :$game-type, :$game-id, :!done,
-                          :tried([]), :error(''), :prompt($ui.guess-prompt),
-                               :guess-status(''), :game-status(''), :winloss-status('') };
+            my ($client, $ui, $topic) = base-objects($user, $game-id);
 
             # Sending a NOP rather than using initial state, because the user
             # can open another browser tab into the game, and should see the
@@ -55,33 +72,19 @@ sub genre-routes-guessing(Str:D $game-type) is export {
             # for just the first display (as soon as they posted a guess, it
             # would go to the POST route and they'd see the game in progress).
             # XXXX: Error handling
-            await $client.send-nop: -> $response {
-                $topic<tried> = $response.data<tried>;
-                $topic<done>  = $response.data<gamestate> >= Finished;
-
-                $topic<game-status>    = $ui.game-status($response);
-                $topic<winloss-status> = $ui.winloss-status($response);
-            };
+            await $client.send-nop: -> $response { update-topic($topic, $response) };
 
             template $ui-type.lc ~ '-' ~ $game-type ~ '.crotmp', $topic
         }
 
         post -> LoggedIn $user, GameID $game-id where { $user.session.games{$_} } {
             request-body -> (:$guess is copy) {
-                my ($client, $ui) = client-ui($user, $game-id);
-                my $topic  = { :$user, :$game-type, :$game-id, :!done,
-                               :tried([]), :error(''), :prompt($ui.guess-prompt),
-                               :guess-status(''), :game-status(''), :winloss-status('') };
+                my ($client, $ui, $topic) = base-objects($user, $game-id);
 
                 $guess .= trim;
                 if $client.valid-guess($guess) {
                     await $client.send-guess: $guess, -> $response {
-                        $topic<tried> = $response.data<tried>;
-                        $topic<done>  = $response.data<gamestate> >= Finished;
-
-                        $topic<guess-status>   = $ui.guess-status($response);
-                        $topic<game-status>    = $ui.game-status($response);
-                        $topic<winloss-status> = $ui.winloss-status($response);
+                        update-topic($topic, $response);
                     };
                 }
                 else {
