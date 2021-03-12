@@ -51,7 +51,7 @@ sub genre-routes-guessing(Str:D $game-type) is export {
         ($client, $ui, $topic)
     }
 
-    my sub update-topic($topic, $response) {
+    my sub update-topic($ui, $topic, $response) {
         $topic<tried> = $response.data<tried>;
         $topic<done>  = $response.data<gamestate> >= Finished;
 
@@ -72,7 +72,7 @@ sub genre-routes-guessing(Str:D $game-type) is export {
             # for just the first display (as soon as they posted a guess, it
             # would go to the POST route and they'd see the game in progress).
             # XXXX: Error handling
-            await $client.send-nop: -> $response { update-topic($topic, $response) };
+            await $client.send-nop: -> $response { update-topic($ui, $topic, $response) };
 
             template $ui-type.lc ~ '-' ~ $game-type ~ '.crotmp', $topic
         }
@@ -84,7 +84,7 @@ sub genre-routes-guessing(Str:D $game-type) is export {
                 $guess .= trim;
                 if $client.valid-guess($guess) {
                     await $client.send-guess: $guess, -> $response {
-                        update-topic($topic, $response);
+                        update-topic($ui, $topic, $response);
                     };
                 }
                 else {
