@@ -41,23 +41,31 @@ sub put-flushed(Str:D $message) {
 
 
 #| Launch a MUGS web UI server on host:port, using a MUGS backend at server
-sub MAIN(Str:D  :$host = %*ENV<MUGS_WEB_SIMPLE_HOST> || 'localhost',
-         UInt:D :$port = %*ENV<MUGS_WEB_SIMPLE_PORT> || 20_000,
-         :$private-key-file = %*ENV<MUGS_WEB_SIMPLE_TLS_KEY> ||
-                              %?RESOURCES<fake-tls/server-key.pem> ||
-                               'resources/fake-tls/server-key.pem',
-         :$certificate-file = %*ENV<MUGS_WEB_SIMPLE_TLS_CERT> ||
-                              %?RESOURCES<fake-tls/server-crt.pem> ||
-                               'resources/fake-tls/server-crt.pem',
-         :$server-ca-file   = %*ENV<MUGS_WEBSOCKET_TLS_CA> ||
-                              %?RESOURCES<fake-tls/ca-crt.pem> ||
-                               'resources/fake-tls/ca-crt.pem',
+sub MAIN(# Web gateway host:port
+         Str:D  :$host        = %*ENV<MUGS_WEB_SIMPLE_HOST> || 'localhost',
+         UInt:D :$port        = %*ENV<MUGS_WEB_SIMPLE_PORT> || 20_000,
+
+         # TLS keys/certs
+         :$private-key-file   = %*ENV<MUGS_WEB_SIMPLE_TLS_KEY>       ||
+                                %?RESOURCES<fake-tls/server-key.pem> ||
+                                 'resources/fake-tls/server-key.pem',
+         :$certificate-file   = %*ENV<MUGS_WEB_SIMPLE_TLS_CERT>      ||
+                                %?RESOURCES<fake-tls/server-crt.pem> ||
+                                 'resources/fake-tls/server-crt.pem',
+         :$server-ca-file     = %*ENV<MUGS_WEBSOCKET_TLS_CA>         ||
+                                %?RESOURCES<fake-tls/ca-crt.pem>     ||
+                                 'resources/fake-tls/ca-crt.pem',
+
+         # WebSocket backend MUGS server
          Str:D  :$server-host = %*ENV<MUGS_WEBSOCKET_HOST> || 'localhost',
          UInt:D :$server-port = %*ENV<MUGS_WEBSOCKET_PORT> || 0,
-         Str:D  :$server = $server-host && $server-port
-                           ?? "wss://$server-host:$server-port/mugs-ws" !! '',
-         Bool:D :$secure = False, Bool:D :$debug = True) is export {
+         Str:D  :$server      = $server-host && $server-port
+                                ?? "wss://$server-host:$server-port/mugs-ws" !! '',
 
+         # Boolean flags
+         Bool:D :$secure      = False,
+         Bool:D :$debug       = True,
+        ) is export {
     my $*DEBUG         = $debug;
     my $mugs-server    = $server || create-stub-mugs-server;
     put-flushed "Using {$server ?? "server '$server'" !! 'internal stub server.'}";
@@ -73,6 +81,7 @@ sub MAIN(Str:D  :$host = %*ENV<MUGS_WEB_SIMPLE_HOST> || 'localhost',
     $ui-server.start;
     my $url = "http{'s' if $secure}://$host:$port/";
     put-flushed "Listening at $url";
+
     react {
         whenever signal(SIGINT) {
             put-flushed 'Shutting down.';
