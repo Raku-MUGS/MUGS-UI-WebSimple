@@ -1,5 +1,21 @@
 Revision history for MUGS-UI-WebSimple
 
+
+0.0.5  *WIP*
+  [HTML5]
+  - Use proper header/main/footer tags in common template instead of divs
+
+  [Cleanup]
+  - Simplify MUGS::App::WebSimple using MUGS::App::CroServer
+  - Switch to dynamic plugin and per-game route loading
+  - Refactor for DRY in MUGS::UI::WebSimple::Genre::Guessing
+  - Improve readability of MUGS::App::WebSimple
+  - Improve readability and screen-reader compatibility of startup messages
+
+  [Bug fixes]
+  - Remove spurious autofocus for 'Choose Different Identities' button
+
+
 0.0.4  2021-03-10
   [Packaging]
   - Support Docker builds
