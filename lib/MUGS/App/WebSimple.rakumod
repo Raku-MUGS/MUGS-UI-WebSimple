@@ -1,37 +1,16 @@
 # ABSTRACT: Core logic to set up and run a MUGS web UI server
 
-use Cro::HTTP::Log::File;
-use Cro::HTTP::Server;
 use Cro::HTTP::Session::InMemory;
 
-use MUGS::Client;
-use MUGS::Server::Stub;
+use MUGS::App::CroServer;
 use MUGS::App::WebSimple::Session;
 use MUGS::App::WebSimple::Routes;
+use MUGS::Client;
+use MUGS::Server::Stub;
 
 
 # Use subcommand MAIN args
 %PROCESS::SUB-MAIN-OPTS = :named-anywhere;
-
-
-#| Create a Cro::HTTP::Server serving the web UI
-sub create-web-ui-server(:$application!, Str:D :$host!, UInt:D :$port!,
-                         Bool:D :$secure!, :$private-key-file!, :$certificate-file!) {
-    my Cro::Service $http = Cro::HTTP::Server.new(
-        http => <1.1>, :$host, :$port, :$application,
-        |(tls => %( :$private-key-file, :$certificate-file ) if $secure),
-        after => [
-            Cro::HTTP::Log::File.new(logs => $*OUT, errors => $*ERR)
-        ]
-    );
-}
-
-
-#| Convenience method to flush a single message to $*OUT without autoflush
-sub put-flushed(Str:D $message) {
-    put $message;
-    $*OUT.flush;
-}
 
 
 #| Launch a MUGS web UI server on host:port, using a MUGS backend at server
@@ -63,34 +42,27 @@ sub MAIN(# Web gateway host:port
 
     $PROCESS::DEBUG = $debug;
 
-    put-flushed 'Loading game client plugins.';
-    MUGS::Client.load-game-plugins;
-    my @loaded = MUGS::Client.known-implementations.sort;
-    put-flushed "Loaded: @loaded[]\n";
-
     my $mugs-server = do if $server {
-        put-flushed "Using server '$server'";
+        put-flushed "Using server '$server'\n";
         $server
     }
     else {
-        put-flushed 'Using internal stub server.';
+        put-flushed "Using internal stub server.\n";
         my $stub = create-stub-mugs-server;
-
-        put-flushed 'Loading game server plugins.';
-        $stub.load-game-plugins;
-        my @loaded = $stub.known-implementations.sort;
-        put-flushed "Loaded: @loaded[]\n";
-
+        load-plugins('server', $stub);
         $stub
     }
+
+    load-plugins('client', MUGS::Client);
+    load-plugins('UI', MUGS::UI, 'WebSimple');
 
     my %mugs-ca        = ca-file => $server-ca-file;
     my $SessionManager = Cro::HTTP::Session::InMemory[MUGSSession];
     my $application    = routes(:root($*PROGRAM.parent(2)), :mugs($mugs-server),
                                 :%mugs-ca, :$SessionManager);
-    my $ui-server      = create-web-ui-server(:$application, :$host, :$port,
-                                              :$secure, :$private-key-file,
-                                              :$certificate-file);
+    my $ui-server      = create-cro-server(:$application, :$host, :$port,
+                                           :$secure, :$private-key-file,
+                                           :$certificate-file);
 
     $ui-server.start;
     my $url = "http{'s' if $secure}://$host:$port/";
