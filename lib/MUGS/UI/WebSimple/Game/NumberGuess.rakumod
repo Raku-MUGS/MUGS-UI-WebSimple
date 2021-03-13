@@ -25,7 +25,7 @@ class MUGS::UI::WebSimple::Game::NumberGuess is MUGS::UI::WebSimple::Genre::Gues
 
     method game-routes() {
         route {
-            include < game number-guess > => genre-routes-guessing('number-guess');
+            include < game number-guess > => self.genre-routes-guessing;
         }
     }
 }

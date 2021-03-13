@@ -74,7 +74,7 @@ class MUGS::UI::WebSimple::Game::Snowman is MUGS::UI::WebSimple::Genre::Guessing
 
     method game-routes() {
         route {
-            include < game snowman > => genre-routes-guessing('snowman');
+            include < game snowman > => self.genre-routes-guessing;
         }
     }
 }
