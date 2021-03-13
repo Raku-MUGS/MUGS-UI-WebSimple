@@ -8,7 +8,8 @@ Revision history for MUGS-UI-WebSimple
   [Cleanup]
   - Simplify MUGS::App::WebSimple using MUGS::App::CroServer
   - Switch to dynamic plugin and per-game route loading
-  - Refactor for DRY in MUGS::UI::WebSimple::Genre::Guessing
+  - Refactor for DRY and OO cleanliness in MUGS::UI::WebSimple::Genre::Guessing
+  - Factor common pieces of ...::Genre::Guessing into new game UI base class
   - Improve readability of MUGS::App::WebSimple
   - Improve readability and screen-reader compatibility of startup messages
 
