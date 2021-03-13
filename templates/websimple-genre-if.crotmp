@@ -1,0 +1,27 @@
+<:sub if-game($title, $_)>
+<:use 'common.crotmp'><&page-header($title, .user)>
+<p>
+<.game-type> game <.game-id><!.done> (<a href="<.game-id>/leave">leave this game</a>)</!>:
+</p>
+<form method="POST" action="<.game-id>">
+  <div id="error"><.error></div>
+  <?.pre-title><h1 id="pre-title"><.pre-title></h1></?>
+  <?.pre-message><p id="pre-message"><.pre-message></p><hr /></?>
+  <?.message><p id="message"><.message></p></?>
+  <?.inventory><p id="inventory"><.inventory></p></?>
+  <?.location>
+    <h2 id="loc-name"><.location.name></h2>
+    <p id="loc-desc"><.location.description></p>
+    <?.location.things><p id="loc-things"><.location.things></p></?>
+    <?.location.exits><p id="loc-exits"><.location.exits></p></?>
+    <?.location.not-me><p id="loc-not-me"><.location.not-me></p></?>
+  </?>
+  <!.done>
+  <div>
+    <.prompt> <input type="text" name="input" autofocus="autofocus" />
+  </div>
+  <input type="submit" value="Submit Turn" />
+  </!>
+  <div id="winloss-status"><.winloss-status></div>
+</form>
+<&page-footer></:>

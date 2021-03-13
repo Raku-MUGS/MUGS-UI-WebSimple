@@ -1,0 +1,1 @@
+<:use 'websimple-genre-if.crotmp'><&if-game('Adventure', $_)>

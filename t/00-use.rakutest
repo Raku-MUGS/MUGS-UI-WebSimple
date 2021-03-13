@@ -12,11 +12,16 @@ use MUGS::App::WebSimple::Session;
 use MUGS::App::WebSimple::Routes;
 
 use MUGS::UI::WebSimple;
+
 use MUGS::UI::WebSimple::Genre::Test;
 use MUGS::UI::WebSimple::Game::Echo;
+
 use MUGS::UI::WebSimple::Genre::Guessing;
 use MUGS::UI::WebSimple::Game::NumberGuess;
 use MUGS::UI::WebSimple::Game::Snowman;
+
+use MUGS::UI::WebSimple::Genre::IF;
+use MUGS::UI::WebSimple::Game::Adventure;
 
 use MUGS::App::WebSimple Empty;
 
