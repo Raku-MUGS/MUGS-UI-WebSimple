@@ -2,6 +2,9 @@ Revision history for MUGS-UI-WebSimple
 
 
 0.0.5  *WIP*
+  [Games]
+  - Add Test genre and Echo "game"
+
   [HTML5]
   - Use proper header/main/footer tags in common template instead of divs
 
