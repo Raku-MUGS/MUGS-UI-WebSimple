@@ -4,55 +4,34 @@ use Cro::HTTP::Router;
 use Cro::WebApp::Template;
 
 use MUGS::Core;
-use MUGS::Client::Genre::Guessing;
-use MUGS::UI;
-
+use MUGS::UI::WebSimple;
 use MUGS::App::WebSimple::Session;
+use MUGS::Client::Genre::Guessing;
 
 
 #| UI for guessing games
-class MUGS::UI::WebSimple::Genre::Guessing is MUGS::UI::Game {
-    method ui-game-type()                { $.ui-type.lc ~ '-' ~ $.game-type }
-    method ui-type()                     { 'WebSimple' }
-    method guess-prompt()                { 'Next guess > ' }
-    method guess-status($response)       { ... }
-    method game-status($response)        { '' }
+class MUGS::UI::WebSimple::Genre::Guessing is MUGS::UI::WebSimple::Game {
+    method guess-prompt()            { 'Next guess > ' }
+    method guess-status($response)   { ... }
+    method game-status($response)    { '' }
     method winloss-status($response) {
         $response.data<winloss> == Win ?? 'You win!' !! ''
     }
 
-    method client-ui(LoggedIn $user, GameID:D $game-id) {
-        my $client = $user.session.games{$game-id};
-
-        # XXXX: There's now an exception type for this
-        die "Game type for game $game-id ({ $client.game-type }) does not match request game-type ($.game-type)"
-            unless $.game-type eq $client.game-type;
-
-        # XXXX: Modernize as per LocalUI
-        my $ui = self.new(:$client)
-            or die "Unable to create $.ui-type UI for game type '$.game-type'";
-
-        ($client, $ui)
-    }
-
     method base-objects(LoggedIn $user, GameID:D $game-id) {
         my ($client, $ui) = self.client-ui($user, $game-id);
-        my $topic = { :$user, :$.game-type, :$game-id, :!done,
-                      :tried([]), :error(''), :prompt($ui.guess-prompt),
-                      :guess-status(''), :game-status(''), :winloss-status('') };
+        my $topic = %(|self.base-topic, :$user, :$game-id, :tried([]),
+                      :prompt($ui.guess-prompt), :guess-status(''));
 
         ($client, $ui, $topic)
     }
 
     method update-topic(::?CLASS:D: $topic, $response) {
-        $topic<tried> = $response.data<tried>;
-        $topic<done>  = $response.data<gamestate> >= Finished;
+        callsame;
 
+        $topic<tried>        = $response.data<tried>;
         $topic<guess-status> = self.guess-status($response)
             if $response.data<result>.defined;
-
-        $topic<game-status>    = self.game-status($response);
-        $topic<winloss-status> = self.winloss-status($response);
     }
 
     method genre-routes-guessing() {

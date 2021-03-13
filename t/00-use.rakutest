@@ -11,6 +11,7 @@ use MUGS::Games:ver<0.0.4>;
 use MUGS::App::WebSimple::Session;
 use MUGS::App::WebSimple::Routes;
 
+use MUGS::UI::WebSimple;
 use MUGS::UI::WebSimple::Genre::Guessing;
 use MUGS::UI::WebSimple::Game::NumberGuess;
 use MUGS::UI::WebSimple::Game::Snowman;

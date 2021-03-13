@@ -1,4 +1,42 @@
-unit class MUGS::UI::WebSimple:auth<zef:japhb>:ver<0.0.4>;
+# ABSTRACT: WebSimple UI for MUGS, with base for game UIs
+
+unit module MUGS::UI::WebSimple:auth<zef:japhb>:ver<0.0.4>;
+
+
+use MUGS::Core;
+use MUGS::UI;
+use MUGS::App::WebSimple::Session;
+
+
+# Base class for WebSimple game UIs
+class Game is MUGS::UI::Game {
+    method ui-game-type() { $.ui-type.lc ~ '-' ~ $.game-type }
+    method ui-type()      { 'WebSimple' }
+
+    method client-ui(LoggedIn $user, GameID:D $game-id) {
+        my $client = $user.session.games{$game-id};
+
+        # XXXX: There's now an exception type for this
+        die "Game type for game $game-id ({ $client.game-type }) does not match request game-type ($.game-type)"
+            unless $.game-type eq $client.game-type;
+
+        # XXXX: Modernize as per LocalUI
+        my $ui = self.new(:$client)
+            or die "Unable to create $.ui-type UI for game type '$.game-type'";
+
+        ($client, $ui)
+    }
+
+    method base-topic() {
+        %(:$.game-type, :!done, :error(''), :game-status(''), :winloss-status(''))
+    }
+
+    method update-topic(::?CLASS:D: $topic, $response) {
+        $topic<done>           = $response.data<gamestate> >= Finished;
+        $topic<game-status>    = self.game-status($response);
+        $topic<winloss-status> = self.winloss-status($response);
+    }
+}
 
 
 =begin pod
