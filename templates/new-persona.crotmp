@@ -6,7 +6,7 @@
 <form method="POST" action="/identity/persona/new">
   <div id="error"><.error></div>
   <div>
-    Desired screen name: <input type="text" name="name" autofocus="autofocus" />
+    <label for="name">Desired screen name:</label> <input type="text" name="name" id="name" autofocus="autofocus" />
   </div>
   <input type="submit" value="Create" />
 </form>

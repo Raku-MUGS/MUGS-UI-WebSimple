@@ -8,7 +8,7 @@
   <div id="game-status"><&HTML(.game-status)></div>
   <!.done>
   <div>
-    Enter a message &gt; <input type="text" name="message" autofocus="autofocus" />
+    <label for="message">Enter a message:</label> <input type="text" name="message" id="message" autofocus="autofocus" />
   </div>
   <input type="submit" value="Send Message" />
   </!>

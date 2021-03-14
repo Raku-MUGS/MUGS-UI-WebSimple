@@ -7,13 +7,13 @@
 <form method="POST" action="/account/new">
   <div id="error"><$_></div>
   <div>
-    Desired username: <input type="text" name="username" autofocus="autofocus" />
+    <label for="username">Desired username:</label> <input type="text" name="username" id="username" autofocus="autofocus" />
   </div>
   <div>
-    Desired password: <input type="password" name="password" />
+    <label for="password">Desired password:</label> <input type="password" name="password" id="password" />
   </div>
   <div>
-    Confirm password: <input type="password" name="confirm" />
+    <label for="confirm">Confirm password:</label> <input type="password" name="confirm" id="confirm" />
   </div>
   <input type="submit" value="Create" />
 </form>
