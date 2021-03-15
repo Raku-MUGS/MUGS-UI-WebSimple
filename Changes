@@ -7,7 +7,8 @@ Revision history for MUGS-UI-WebSimple
   - Add IF genre and Adventure game
 
   [HTML5]
-  - Use proper header/main/footer tags in common template instead of divs
+  - Use proper header/main/footer elements in common template instead of divs
+  - Add <label> elements for form fields
 
   [Cleanup]
   - Simplify MUGS::App::WebSimple using MUGS::App::CroServer
