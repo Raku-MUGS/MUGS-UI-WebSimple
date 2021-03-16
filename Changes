@@ -1,6 +1,12 @@
 Revision history for MUGS-UI-WebSimple
 
 
+0.0.6  *WIP*
+  [Bug fixes]
+  - Fix dependency installs in README SYNOPSIS
+  - Get rid of colon in page title causing long pause in screen reader
+
+
 0.0.5  2021-03-15
   [Games]
   - Add Test genre and Echo "game"

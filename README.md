@@ -16,13 +16,14 @@ SYNOPSIS
     git clone git@github.com:Raku-MUGS/MUGS-UI-WebSimple.git
 
     cd MUGS-Core
-    zef install .
+    zef install --exclude="pq:ver<5>:from<native>" .
     mugs-admin create-universe
 
     cd ../MUGS-Games
     zef install .
 
     cd ../MUGS-UI-WebSimple
+    zef install --deps-only .  # Or skip --deps-only if you prefer
 
 
     ### GAME SERVER (handles actual gameplay; used by the web UI gateway)
