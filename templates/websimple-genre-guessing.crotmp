@@ -16,7 +16,7 @@
   </?>
   <!.done>
   <div>
-    <label for="guess"><.prompt></label> <input type="text" name="guess" id="guess" autofocus="autofocus" />
+    <label for="guess"><.prompt></label> <input type="text" name="guess" id="guess" />
   </div>
   <input type="submit" value="Submit Guess" />
   </!>

@@ -21,7 +21,7 @@
 </p>
 
 <p>
-  <a href="/login"><button type="button" autofocus="autofocus">Log In</button></a>
+  <a href="/login"><button type="button">Log In</button></a>
   <a href="/account/new"><button type="button">Create a New Account</button></a>
 </p>
 <&page-footer>

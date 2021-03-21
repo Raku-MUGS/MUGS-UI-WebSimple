@@ -18,7 +18,7 @@
   </?>
   <!.done>
   <div>
-    <label for="input"><.prompt></label> <input type="text" name="input" id="input" autofocus="autofocus" />
+    <label for="input"><.prompt></label> <input type="text" name="input" id="input" />
   </div>
   <input type="submit" value="Submit Turn" />
   </!>
