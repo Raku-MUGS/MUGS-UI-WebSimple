@@ -1,6 +1,6 @@
 <:use 'common.crotmp'><&page-header('Echo', .user)>
 <p>
-<.game-type> game <.game-id><!.done> (<a href="<.game-id>/leave">leave this game</a>)</!>:
+<.game-type> game <.game-id><!.done> (<a href="<.game-id>/leave">leave this game</a>)</!>
 </p>
 <form method="POST" action="<.game-id>">
   <div id="error"><.error></div>
