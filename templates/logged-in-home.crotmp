@@ -1,52 +1,11 @@
 <:use 'common.crotmp'><&page-header('Home', .user)>
-<h1>Welcome to MUGS!</h1>
+<nav>
+  <h1>Main Menu</h1>
 
-<div id="identities">
-  <table>
-    <tr><th class="row-label">Logged in as</th><td><.user.username></td></tr>
-    <tr><th class="row-label">Default persona</th><td><?.default-persona><.default-persona></?><!.default-persona><em>none chosen</em></!></td></tr>
-    <tr><th class="row-label">Default character</th><td><?.default-character><.default-character></?><!.default-character><em>none chosen</em></!></td></tr>
-  </table>
-  <p>
-    <?.has-identities>
-    <a href="/identity"><button type="button">Choose Different Identities</button></a>
-    </?>
-    <!.has-identities>
-    In order to play games, you will need to <a href="/identity"><button type="button" autofocus="autofocus">Choose Your Identities</button></a>.
-    </!>
-  </p>
-</div>
-
-<?.has-identities>
-<hr />
-
-<div id="joined-games-list">
-<?.joined-games>
-Games you've already joined:
-<table>
-  <tr><th>Type</th><th>ID</th></tr>
-<@joined-games>
-  <tr><td><.game-type></td><td><a href="/game/<.game-type>/<.game-id>"><.game-id></a></td></tr>
-</@>
-</table>
-</?>
-<!.joined-games>
-You aren't currently in any games.
-</!>
-</div>
-
-<div id="available-games-list">
-Game types available to join:
-<table>
-  <tr><th>Type</th><th>Genres</th><th>Description</th></tr>
-<@available-games>
-  <tr>
-    <td><a href="/game/<.game-type>/new"><.game-type></a></td>
-    <td><.genre-tags></td>
-    <td><.game-desc></td>
-  </tr>
-</@>
-</table>
-</div>
-</?>
+  <ul>
+    <li><a href="games">Games</a></li>
+    <li><a href="settings">Settings</a></li>
+    <li><a href="help">Help</a></li>
+  </ul>
+</nav>
 <&page-footer>

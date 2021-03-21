@@ -1,0 +1,42 @@
+<:use 'common.crotmp'><&page-header('Games', .user)>
+<h1>Games</h1>
+
+<?.has-identities>
+<div id="joined-games-list">
+<h2>Games you've already joined</h2>
+<?.joined-games>
+<table>
+  <tr><th>Type</th><th>ID</th></tr>
+<@joined-games>
+  <tr><td><.game-type></td><td><a href="/game/<.game-type>/<.game-id>"><.game-id></a></td></tr>
+</@>
+</table>
+</?>
+<!.joined-games>
+<p>
+  You aren't currently in any games.
+</p>
+</!>
+</div>
+
+<div id="available-games-list">
+<h2>Game types available to join</h2>
+<table>
+  <tr><th>Type</th><th>Genres</th><th>Description</th></tr>
+<@available-games>
+  <tr>
+    <td><a href="/game/<.game-type>/new"><.game-type></a></td>
+    <td><.genre-tags></td>
+    <td><.game-desc></td>
+  </tr>
+</@>
+</table>
+</div>
+</?>
+<!.has-identities>
+<p>
+  In order to play games, you will need to
+  <a href="/identity">Choose Your Identities</a>.
+</p>
+</!>
+<&page-footer>

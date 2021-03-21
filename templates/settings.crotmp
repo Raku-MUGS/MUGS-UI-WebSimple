@@ -1,0 +1,20 @@
+<:use 'common.crotmp'><&page-header('Settings', .user)>
+<h1>Settings</h1>
+
+<div id="identities">
+  <table>
+    <tr><th class="row-label">Logged in as</th><td><.user.username></td></tr>
+    <tr><th class="row-label">Default persona</th><td><?.default-persona><.default-persona></?><!.default-persona><em>none chosen</em></!></td></tr>
+    <tr><th class="row-label">Default character</th><td><?.default-character><.default-character></?><!.default-character><em>none chosen</em></!></td></tr>
+  </table>
+  <p>
+    <?.has-identities>
+    <a href="/identity">Choose Different Identities</a>
+    </?>
+    <!.has-identities>
+    In order to play games, you will need to
+    <a href="/identity">Choose Your Identities</a>.
+    </!>
+  </p>
+</div>
+<&page-footer>

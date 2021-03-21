@@ -1,0 +1,34 @@
+<:use 'common.crotmp'><&page-header('General Help', .user)>
+<h1>General Help</h1>
+
+<p>
+  MUGS (<strong>M</strong>ulti-<strong>U</strong>ser <strong>G</strong>aming
+  <strong>S</strong>ervices) is a free-as-in-speech platform for building game
+  servers that can serve any game, to anyone, using the interfaces that work
+  best for them.
+</p>
+
+<p>
+  This is the <strong>WebSimple</strong> interface; it is designed to:
+  <ul>
+    <li>Be resource-friendly and low-bandwidth</li>
+    <li>Minimize flashing and garish graphics</li>
+  </ul>
+</p>
+
+<p>
+  To play games, you must be <a href="/login">logged in</a>
+  with a <a href="/identity">chosen persona and character</a>.
+  You can then view the list of <a href="/games">available game types</a>,
+  choose one, and start playing.
+</p>
+
+<p>
+  You can always return to the <a href="/">main menu</a> to:
+  <ul>
+    <li><a href="/games">play more games</a></li>
+    <li><a href="/settings">change your settings</a></li>
+    <li><a href="/help">read help on other topics</a></li>
+  </ul>
+</p>
+<&page-footer>

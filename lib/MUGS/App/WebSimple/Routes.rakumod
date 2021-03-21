@@ -113,22 +113,40 @@ sub logged-in-routes(:$mugs!) {
 
     route {
         get -> LoggedIn $user {
-            my $s                 = $user.session;
-            my @available-games   = available-game-types($s).sort:
-                                    { .<genre-tags>, .<game-type> };
-            my @joined-games      = $s.games.values.sort:
-                                    { .game-type, .game-id };
-            my $default-persona   = $s.default-persona   // '';
-            my $default-character = $s.default-character // '';
-            my $has-identities    = $default-persona && $default-character;
-            template 'logged-in-home.crotmp', { :$user, :$has-identities,
-                                                :$default-persona,
-                                                :$default-character,
-                                                :@available-games, :@joined-games }
+            template 'logged-in-home.crotmp', { :$user }
         }
 
         get -> LoggedIn, *@ {
             redirect '/'
+        }
+
+        get -> LoggedIn $user, 'games' {
+            my $s               = $user.session;
+            my @available-games = available-game-types($s).sort:
+                                  { .<genre-tags>, .<game-type> };
+            my @joined-games    = $s.games.values.sort:
+                                  { .game-type, .game-id };
+            my $has-identities  = $s.default-persona && $s.default-character;
+            template 'games.crotmp', { :$user, :$has-identities,
+                                       :@available-games, :@joined-games }
+        }
+
+        get -> LoggedIn $user, 'settings' {
+            my $s                 = $user.session;
+            my $default-persona   = $s.default-persona   // '';
+            my $default-character = $s.default-character // '';
+            my $has-identities    = $default-persona && $default-character;
+            template 'settings.crotmp', { :$user, :$has-identities,
+                                          :$default-persona, :$default-character }
+        }
+
+        get -> LoggedIn $user, 'help' {
+            template 'help-menu.crotmp', { :$user }
+        }
+
+        get -> LoggedIn $user, 'help', *@topic {
+            my $topic-key = @topic.join('-');
+            template "help-{$topic-key}.crotmp", { :$user }
         }
 
         get -> LoggedIn $user, 'identity' {

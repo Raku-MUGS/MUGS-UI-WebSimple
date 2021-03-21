@@ -1,0 +1,9 @@
+<:use 'common.crotmp'><&page-header('Help Menu', .user)>
+<nav>
+  <h1>Help Menu</h1>
+
+  <ul>
+    <li><a href="help/general">General</li>
+  </ul>
+</nav>
+<&page-footer>
