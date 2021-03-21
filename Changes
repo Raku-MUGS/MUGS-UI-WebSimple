@@ -2,13 +2,15 @@ Revision history for MUGS-UI-WebSimple
 
 
 0.0.7  *WIP*
-  [Cleanup]
+  [Coding standards]
+  - Make a general help-TOPIC.crotmp convention for adding help templates
+
+  [UI/UX]
   - Split games and settings into separate pages
   - Add a help menu (containing just general help for now)
   - Simplify logged-in-home to just be a main menu
-
-  [Coding standards]
-  - Make a general help-TOPIC.crotmp convention for adding help templates
+  - Disable autofocus where it confuses Orca
+  - Remove weirdly voiced colons after 'leave this game' links
 
 
 0.0.6  2021-03-16
