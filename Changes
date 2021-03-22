@@ -1,7 +1,7 @@
 Revision history for MUGS-UI-WebSimple
 
 
-0.0.7  *WIP*
+0.1.0  2021-03-21
   [Packaging]
   - Add more generated HTML files to .gitignore
 
