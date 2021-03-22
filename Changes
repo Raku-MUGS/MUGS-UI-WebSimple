@@ -2,6 +2,9 @@ Revision history for MUGS-UI-WebSimple
 
 
 0.0.7  *WIP*
+  [Packaging]
+  - Add more generated HTML files to .gitignore
+
   [Coding standards]
   - Make a general help-TOPIC.crotmp convention for adding help templates
 
