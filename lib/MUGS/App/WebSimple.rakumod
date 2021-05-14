@@ -37,7 +37,7 @@ sub MAIN(# Web gateway host:port
 
          # Boolean flags
          Bool:D :$secure      = False,
-         Bool:D :$debug       = True,
+         Bool:D :$debug       = False,
         ) is export {
 
     $PROCESS::DEBUG = $debug;
