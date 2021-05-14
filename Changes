@@ -1,7 +1,7 @@
 Revision history for MUGS-UI-WebSimple
 
 
-0.1.2  *WIP*
+0.1.2  2021-05-13
   [Bug fixes]
   - Fix "Use of Nil in string context in sub escape-text" warnings
 
