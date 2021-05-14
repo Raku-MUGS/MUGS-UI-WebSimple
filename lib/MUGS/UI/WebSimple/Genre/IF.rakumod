@@ -23,7 +23,7 @@ class MUGS::UI::WebSimple::Genre::IF is MUGS::UI::WebSimple::Game {
 
     method base-objects(LoggedIn $user, GameID:D $game-id) {
         my ($client, $ui) = self.client-ui($user, $game-id);
-        my $topic = %(|self.base-topic, :$user, :$game-id);
+        my $topic = %(|self.base-topic, :$user, :$game-id, :prompt(''));
 
         ($client, $ui, $topic)
     }
