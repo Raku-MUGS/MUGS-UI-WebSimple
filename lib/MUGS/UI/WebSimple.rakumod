@@ -118,6 +118,18 @@ releases will include many more games and genres, plus better handling of
 asynchronous events such as inter-player messaging.
 
 
+=head1 GOTCHAS
+
+In this early release, there are a couple rough edges (aside from the very
+simple UI and trivial game selection):
+
+=item Templates only work in checkout dir; must run mugs-web-simple from checkout root
+
+=item Each mugs-web-simple instance can only serve I<either> HTTP or HTTPS (not both at once)
+
+=item Session cookies do not have a SameSite setting; some browsers will complain if not using HTTPS
+
+
 =head1 ROADMAP
 
 MUGS is still in its infancy, at the beginning of a long and hopefully very

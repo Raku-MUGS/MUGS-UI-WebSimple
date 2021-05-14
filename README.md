@@ -71,6 +71,17 @@ MUGS::UI::WebSimple is a Cro-based web gateway for MUGS, including templates and
 
 This Proof-of-Concept release only contains very simple turn-based games, plus a simple front door for creating identities and choosing games to play. Future releases will include many more games and genres, plus better handling of asynchronous events such as inter-player messaging.
 
+GOTCHAS
+=======
+
+In this early release, there are a couple rough edges (aside from the very simple UI and trivial game selection):
+
+  * Templates only work in checkout dir; must run mugs-web-simple from checkout root
+
+  * Each mugs-web-simple instance can only serve *either* HTTP or HTTPS (not both at once)
+
+  * Session cookies do not have a SameSite setting; some browsers will complain if not using HTTPS
+
 ROADMAP
 =======
 
