@@ -15,7 +15,7 @@ class MUGS::UI::WebSimple::Genre::Guessing is MUGS::UI::WebSimple::Game {
     method guess-status($response)   { ... }
     method game-status($response)    { '' }
     method winloss-status($response) {
-        $response.data<winloss> == Win ?? 'You win!' !! ''
+        $.client.my-winloss($response) == Win ?? 'You win!' !! ''
     }
 
     method base-objects(LoggedIn $user, GameID:D $game-id) {

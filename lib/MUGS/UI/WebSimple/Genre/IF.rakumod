@@ -14,12 +14,11 @@ class MUGS::UI::WebSimple::Genre::IF is MUGS::UI::WebSimple::Game {
     method game-status($response) { '' }
 
     method winloss-status($response) {
-        with $response.data<winloss> {
-            when Loss { return 'You have lost.' }
-            when Win  { return 'You have won!'  }
+        given $.client.my-winloss($response) {
+            when Loss { 'You have lost.' }
+            when Win  { 'You have won!'  }
+            default   { ''               }
         }
-
-        ''
     }
 
     method base-objects(LoggedIn $user, GameID:D $game-id) {
