@@ -1,6 +1,18 @@
 Revision history for MUGS-UI-WebSimple
 
 
+0.1.2  *WIP*
+  [Bug fixes]
+  - Fix "Use of Nil in string context in sub escape-text" warnings
+
+  [Cleanup]
+  - Default --debug to False (off)
+  - Switch to newer client.my-winloss() method for determining winloss status
+
+  [Docs]
+  - Add GOTCHAS section to README
+
+
 0.1.1  2021-04-15
   - Update versioned dependencies
 
