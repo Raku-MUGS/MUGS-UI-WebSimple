@@ -1,6 +1,6 @@
 # ABSTRACT: WebSimple UI for MUGS, with base for game UIs
 
-unit module MUGS::UI::WebSimple:auth<zef:japhb>:ver<0.1.2>;
+unit module MUGS::UI::WebSimple:auth<zef:japhb>:ver<0.1.3>;
 
 
 use MUGS::Core;
