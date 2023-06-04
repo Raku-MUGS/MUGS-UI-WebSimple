@@ -1,9 +1,12 @@
 Revision history for MUGS-UI-WebSimple
 
 
-0.1.3  *WIP*
+{{$NEXT}}
   [Contacting us]
   - Move official IRC support channel from Freenode to Libera.Chat
+
+  [Packaging]
+  - Use UploadToZef for zef upload
 
   [Testing]
   - Run GitHub test workflow against MUGS-Core/Games HEAD rather than previous release
