@@ -58,7 +58,7 @@ sub MAIN(# Web gateway host:port
 
     my %mugs-ca        = ca-file => $server-ca-file;
     my $SessionManager = Cro::HTTP::Session::InMemory[MUGSSession];
-    my $application    = routes(:root($*PROGRAM.parent(2)), :mugs($mugs-server),
+    my $application    = routes(:mugs($mugs-server),
                                 :%mugs-ca, :$SessionManager);
     my $ui-server      = create-cro-server(:$application, :$host, :$port,
                                            :$secure, :$private-key-file,
