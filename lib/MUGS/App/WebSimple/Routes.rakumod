@@ -6,13 +6,16 @@ use MUGS::UI;
 use MUGS::App::WebSimple::Session;
 
 
-sub routes(IO::Path:D :$root!, :$mugs!, :%mugs-ca!, Mu:U :$SessionManager!) is export {
-    template-location $root.child('templates');
+sub routes(:$mugs!, :%mugs-ca!, Mu:U :$SessionManager!) is export {
 
     route {
+
+        resources-from %?RESOURCES;
+        templates-from-resources prefix => 'templates';
+
         before $SessionManager.new;
 
-        include static-routes(:$root);
+        include static-routes;
         include session-routes(:$mugs, :%mugs-ca);
         include logged-in-routes(:$mugs);
 
@@ -23,11 +26,10 @@ sub routes(IO::Path:D :$root!, :$mugs!, :%mugs-ca!, Mu:U :$SessionManager!) is e
     }
 }
 
-sub static-routes(IO::Path:D :$root!) {
-    my $css-dir = $root.child('css');
+sub static-routes {
     route {
         get -> 'css', *@path {
-            static $css-dir, @path
+            static 'resources', 'css', @path
         }
     }
 }
