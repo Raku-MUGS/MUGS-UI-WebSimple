@@ -4,7 +4,7 @@ use Cro::WebApp::Template;
 
 plan 1;
 
-my $location = $*PROGRAM.absolute.IO.parent.sibling('templates');
+my $location = $*PROGRAM.absolute.IO.parent.sibling('resources/templates');
 lives-ok { template-location $location, :compile-all },
     'All templates have valid syntax';
 
