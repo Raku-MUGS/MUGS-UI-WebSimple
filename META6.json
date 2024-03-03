@@ -8,8 +8,8 @@
   "depends": [
     "Cro::HTTP:ver<0.8.9+>",
     "Cro::WebApp:ver<0.8.9+>",
-    "MUGS::Core:ver<0.1.3>",
-    "MUGS::Games:ver<0.1.3>"
+    "MUGS::Core:ver<0.1.4>",
+    "MUGS::Games:ver<0.1.4>"
   ],
   "description": "WebSimple UI for MUGS, including HTTP gateway and game UIs",
   "license": "Artistic-2.0",
