@@ -2,6 +2,18 @@ Revision history for MUGS-UI-WebSimple
 
 
 {{$NEXT}}
+  [Dependencies]
+  - Update MUGS dependencies to 0.1.4
+  - Update GitHub test workflow dependencies to silence a GitHub warning
+
+  [Packaging]
+  - Move templates to resources tree so that WebSimple will render them
+    correctly when installed by zef (thank you for the PR @codesections!)
+  - Update copyright year range in README
+
+  [Testing]
+  - Support templates -> resources move in tests
+
 
 0.1.3  2023-06-04T12:57:24-07:00
   [Contacting us]
