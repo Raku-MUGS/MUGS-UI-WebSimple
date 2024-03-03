@@ -2,6 +2,8 @@ Revision history for MUGS-UI-WebSimple
 
 
 {{$NEXT}}
+
+0.1.4  2024-03-03T10:11:07-08:00
   [Dependencies]
   - Update MUGS dependencies to 0.1.4
   - Update GitHub test workflow dependencies to silence a GitHub warning
